@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <!-- Twitter meta-->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@pratikborsadiya">
+    <meta property="twitter:creator" content="@pratikborsadiya">
+    <!-- Open Graph Meta-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vali Admin">
+    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
+    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
+    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
+    <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <title>约健 - 俱乐部管理员</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/docs/css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    {include file="commom/top"}
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    {include file="commom/left"}
+    <main class="app-content">
+      <div class="app-title">
+        <div>
+          <h1><i class="fa fa-users"></i>俱乐部会员</h1>
+          <p>Club members</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb side">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a href="#">俱乐部会员</a></li>
+        </ul>
+      </div>
+      <div class="row">
+          <div class="col-md-12">
+              <div class="tile">
+                  <div class="tile-body">
+                      <table class="table table-hover table-bordered" id="sampleTable">
+                          <thead>
+                              <tr>
+                                  <th>编号</th>
+                                  <th>姓名</th>
+                                  <th>头像</th>
+                                  <th>性别</th>
+                                  <th>联系电话</th>
+                                  <th>邮箱</th>
+                                  <th>加入时间</th>
+                                  <th>状态</th>
+                                  <th>操作</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                              {volist name="user" id="us"}
+                                  <td>{$i}</td>
+                                  <td>{$us.user_name}</td>
+                                  <td><img src="__IMG__/images/{$us.user_pic}" style="width:30px;height:30px;"></td>
+                                  {if $us.ugender==0}
+                                  <td>男</td>
+                                  {else/}
+                                  <td>女</td>
+                                  {/if}
+                                  <td>{$us.user_tel}</td>   
+                                  <td>{$us.user_email}</td>  
+                                  <td>{$us.user_time}</td>
+                                  {if $us.user_status==0}
+                                  <td><div class="bs-component"><span class="badge badge-pill badge-primary">正常</span></div></td>
+                                  <td>
+                                    <a href="{:url('vip/lock',['user_id'=>$us.user_id])}">锁定</a></td>
+                                  {else/}
+                                  <td><div class="bs-component"><span class="badge badge-pill badge-warning">禁用</span></div></td>
+                                  <td><a href="{:url('vip/unlock',['user_id'=>$us.user_id])}">解除锁定</a></td>
+                                  {/if}
+                              </tr>
+                              {/volist}
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </main>
+  <!-- 锁定模态框（Modal） -->
+  <!-- <div class="modal fade" style="margin-top: 200px;" id="myModal" data-backdrop="static" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="model-backdrop fade in"></div>
+  <div class="modal-dialog">
+    <div class="modal-content" style="margin-top: 200xp;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <h2 class="modal-body" style="margin-left: 100px">确认修改该会员状态吗？</h2>
+
+      <div class="modal-footer">
+        {volist name="user" id="us"}
+          <form class="form-horizontal" method="POST" action="{:url('lock',['user_id'=>$us.user_id])}" enctype="multipart/form-data">
+          {/volist} 
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <input type="submit" class="btn btn-danger btn-ok" value="确认">
+        </form>
+      </div>
+    </div>
+  </div>
+</div> -->
+    <!-- Essential javascripts for application to work-->
+    <script src="__PUBLIC__/docs/js/jquery-3.2.1.min.js"></script>
+    <script src="__PUBLIC__/docs/js/popper.min.js"></script>
+    <script src="__PUBLIC__/docs/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/docs/js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="__PUBLIC__/docs/js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="__PUBLIC__/docs/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/docs/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+    <!-- Google analytics script-->
+  </body>
+</html>

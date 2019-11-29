@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <!-- Twitter meta-->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@pratikborsadiya">
+    <meta property="twitter:creator" content="@pratikborsadiya">
+    <!-- Open Graph Meta-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vali Admin">
+    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
+    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
+    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
+    <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <title>约健 - 俱乐部管理员</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/docs/css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    {include file="commom/top"}
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    {include file="commom/left"}
+    <main class="app-content">
+      <div class="app-title">
+        <div>
+          <h1><i class="fa fa-futbol-o"></i>俱乐部教练</h1>
+          <p>Table to display analytical data effectively</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb side">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a href="#">俱乐部教练</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <p><a class="btn btn-primary icon-btn" href="{:url('coach/add')}"><i class="fa fa-plus"></i>添加</a></p>
+                    <table class="table table-hover table-bordered" id="sampleTable">
+                        <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>姓名</th>
+                                <th>头像</th>
+                                <th>性别</th>
+                                <th>年龄</th>  
+                                <th>执教经验</th>                             
+                                <th>简介</th>
+                                <th>身份</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    {volist name="info" id="vo"}
+                            <tr>
+                                <td>{$i}</td>
+                                <td>{$vo.coach_name}</td>
+                                <td><img style="width:50px;height:50px" src="__IMG__/images/coach/{$vo.coach_pic}"></td>
+                                {if $vo.cgender==1}
+                                <td>女</td>
+                                {else/}
+                                <td>男</td>
+                                {/if}
+                                <td>{$vo.coach_age}岁</td> 
+                                <td>{$vo.coach_time}</td>
+                                <td>{$vo.coach_desc}</td>
+
+                                {if $vo.coach_status==0}
+                                <td><div class="bs-component"><span class="badge badge-pill badge-primary">普通教练</span></div></td>
+                                <td><div class="bs-component"><span class="badge badge-pill badge-primary">未审核</span></div></td>
+                                <td><a href="{:url('coach/update',['coach_id'=>$vo.coach_id])}">修改</a>|
+                                    <a href="{:url('coach/del',['coach_id'=>$vo.coach_id])}">删除</a>
+                                   <a class="btn btn-info" href="{:url('coach/pub',['coach_id'=>$vo.coach_id])}">一键推荐</a>
+                                
+                                </td>
+
+                                {elseif $vo.coach_status==1/}
+                                <td><div class="bs-component"><span class="badge badge-pill badge-primary">普通教练</span></div></td>
+                                <td><div class="bs-component"><span class="badge badge-pill badge-primary">审核中</span></div></td>
+                                <td><a class="btn btn-info" id="lock" >已推荐</a></td>
+                                 
+                                {elseif $vo.coach_status==2/}
+                                <td><div class="bs-component"><span class="badge badge-pill badge-primary">普通教练</span></div></td>
+                                <td><div class="bs-component"><span class="badge badge-pill badge-primary">审核未通过</span></td>
+                               <td><a href="{:url('coach/update',['coach_id'=>$vo.coach_id])}">修改</a>|
+                                    <a href="{:url('coach/del',['coach_id'=>$vo.coach_id])}" >删除</a>
+                                    <a class="btn btn-info" href="{:url('coach/pub',['coach_id'=>$vo.coach_id])}">一键推荐</a>
+                                
+                                </td>
+
+                                {else/}
+                                <td><div class="bs-component"><span class="badge badge-pill badge-primary">权威大师</span></div></td>
+                                <td><div class="bs-component"><span class="badge badge-pill badge-primary">审核已通过</span></td>
+                                <td><a class="btn btn-info" id="lock" >已推荐</a></td>
+                                {/if}
+                            </tr>
+                    {/volist}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+    <!-- 删除模态框（Modal） -->
+   <!--  <div class="modal fade" id="myModal" data-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="model-backdrop fade in"></div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <h2 class="modal-body" style="margin-left: 100px">确认删除该教练吗？</h2>
+
+                <div class="modal-footer">
+                    <form class="form-horizontal" method="POST"
+                        action="{:url('coach/del',['coach_id'=>$vo.coach_id])}" enctype="multipart/form-data">
+                        <input type="hidden" name="train_id" id="train_id">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <input type="submit" class="btn btn-danger btn-ok" value="确认删除">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+   
+    <!-- Essential javascripts for application to work-->
+    <script src="__PUBLIC__/docs/js/jquery-3.2.1.min.js"></script>
+    <script src="__PUBLIC__/docs/js/popper.min.js"></script>
+    <script src="__PUBLIC__/docs/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/docs/js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="__PUBLIC__/docs/js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="__PUBLIC__/docs/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/docs/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+    <!-- Google analytics script-->
+    <script type="text/javascript">
+      var box=document.getElementById("lock");
+        function change(){
+          box.textContent="已推荐";
+        }
+      </script>
+  </body>
+</html>

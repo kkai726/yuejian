@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description"
+        content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <!-- Twitter meta-->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@pratikborsadiya">
+    <meta property="twitter:creator" content="@pratikborsadiya">
+    <!-- Open Graph Meta-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vali Admin">
+    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
+    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
+    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
+    <meta property="og:description"
+        content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <title>约健 - 俱乐部管理员</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/docs/css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    {include file="commom/top"}
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    {include file="commom/left"}
+    <main class="app-content">
+        <div class="app-title">
+            <div>
+                <h1><i class="fa fa-edit"></i>俱乐部课程</h1>
+                <p>Club Course</p>
+            </div>
+            <ul class="app-breadcrumb breadcrumb side">
+                <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                <li class="breadcrumb-item"><a href="#">俱乐部课程</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="tile">
+                    <h3 class="tile-title">修改课程</h3>
+                    <div class="tile-body">
+                        <form class="form-horizontal" method="post" enctype="multipart/form-data"
+                        action="{:url('updatecourse',['course_id'=>$course.course_id])}">
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">课程名称</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" name="coursename" type="text" placeholder="请输入课程名称" value="{$course.course_name}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">等级</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" name="level">
+                                        {volist name="level" id="us"}
+                                            <option value="{$us.lid}">{$us.level_name}</option>
+                                        {/volist}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">课程海报</label>
+                                <div class="col-md-8">
+                                <img src="__PUBLIC__/course/{$course.course_pic}" style="width: 80px;height: 80px;margin-bottom:10px">
+                                <input class="form-control" name="course_pic" type="file">
+                                <input type="hidden" name="course_pic2" value="{$course.course_pic}"></input>
+                                </div>
+                            </div>  
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">价格</label>
+                                <div class="col-md-8">
+                                    <input class="form-control col-md-8" name="courseprice" type="number" placeholder="请输入课程价格" value="{$course.course_price}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">地点</label>
+                                <div class="col-md-8">
+                                    <input class="form-control col-md-8" name="courseaddress" type="text" placeholder="请输入开课地点" value="{$course.course_address}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">所属教练</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" name="master">
+                                        {volist name="coach" id="us"}
+                                            <option value="{$us.coach_id}">{$us.coach_name}</option>
+                                        {/volist}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">课程简介</label>
+                                <div class="col-md-8">
+                                    <textarea class="form-control" name="courseintro" rows="4" placeholder="请输入课程简介">{$course.course_desc}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">开课时间</label>
+                                <div class="col-md-8">
+                                    <input class="form-control col-md-8" name="courseopen" type="datetime-local" placeholder="请输入开课时间">
+                                    {$course.course_otime}
+                                </div>
+                            </div>
+                        <div class="tile-footer">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-3">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fa fa-fw fa-lg fa-check-circle"></i>提交</button>&nbsp;&nbsp;&nbsp;
+                                    <a class="btn btn-secondary" href="{:url('course/lst')}">
+                                    <i class="fa fa-fw fa-lg fa-times-circle"></i>取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Essential javascripts for application to work-->
+    <script src="__PUBLIC__/docs/js/jquery-3.2.1.min.js"></script>
+    <script src="__PUBLIC__/docs/js/popper.min.js"></script>
+    <script src="__PUBLIC__/docs/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/docs/js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="__PUBLIC__/docs/js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="__PUBLIC__/docs/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/docs/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+    <!-- Google analytics script-->
+</body>
+
+</html>

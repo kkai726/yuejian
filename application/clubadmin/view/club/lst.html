@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <!-- Twitter meta-->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@pratikborsadiya">
+    <meta property="twitter:creator" content="@pratikborsadiya">
+    <!-- Open Graph Meta-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vali Admin">
+    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
+    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
+    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
+    <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <title>约健 - 俱乐部管理员</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/docs/css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    {include file="commom/top"}
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    {include file="commom/left"}
+    <main class="app-content">
+      <div class="app-title">
+        <div>
+          <h1><i class="fa fa-list"></i>俱乐部信息</h1>
+          <p>Club Information</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+          <li class="breadcrumb-item"><a href="#">俱乐部信息</a></li>
+        </ul>
+      </div>
+      {volist name="club" id="us"}
+      <div class="row">
+            <div class="col-md-12">
+              <div class="tile">
+                <section class="invoice">
+                  <div class="row mb-4">
+                    <div class="col-6">
+                      <h2 class="page-header"><i class="fa fa-globe"></i>{$us.club_name}</h2>
+                    </div>
+                    <!-- <div class="col-6">
+                      <h5 class="text-right">创办时间: 01/01/2016</h5>
+                    </div> -->
+                  </div>
+                  <div class="row invoice-info">
+                    <div class="col-4">
+                        <img src="__PUBLIC__/club/{$us.club_pic}" style="width:200px;height:200px;margin-left:30px;">
+                    </div>
+                    <div class="col-4">
+                      <h5>俱乐部介绍</h5>
+                        {$us.club_desc}
+                    </div>
+                    <div class="col-4"><b>联系电话：{$us.club_tel}</b><br><b>地址：{$us.club_adress}</b><br><b>开放时间：{$us.club_otime}</b><br><b>关闭时间：{$us.club_etime}</b></div>
+                  </div>
+                  
+                  <div class="row d-print-none mt-2">
+                    <div class="col-12 text-right">
+                    <a class="btn btn-primary" href="{:url('club/edit',['club_id'=>$us.club_id])}">
+                    <i class="fa fa-print"></i>修改信息</a></div>
+             
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        {/volist}
+    </main>
+    <!-- Essential javascripts for application to work-->
+    <script src="__PUBLIC__/docs/js/jquery-3.2.1.min.js"></script>
+    <script src="__PUBLIC__/docs/js/popper.min.js"></script>
+    <script src="__PUBLIC__/docs/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/docs/js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="__PUBLIC__/docs/js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+  </body>
+</html>

@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <!-- Twitter meta-->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@pratikborsadiya">
+    <meta property="twitter:creator" content="@pratikborsadiya">
+    <!-- Open Graph Meta-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vali Admin">
+    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
+    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
+    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
+    <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <title>约健 - 俱乐部管理员</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/docs/css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    {include file="commom/top"}
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    {include file="commom/left"}
+    <main class="app-content">
+      <div class="app-title">
+        <div>
+          <h1><i class="fa fa-caret-square-o-down"></i>俱乐部视频</h1>
+          <p>Table to display analytical data effectively</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb side">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a href="#">俱乐部视频</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <p><a class="btn btn-primary icon-btn" href="{:url('video/add')}"><i class="fa fa-plus"></i>添加</a></p>
+                    <table class="table table-hover table-bordered" id="sampleTable">
+                        <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>视频名称</th>
+                                <th>视频</th>
+                                <th>视频简介</th>
+                                <th>上传时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                         <tbody id="num">
+                        {volist name="info" id="vo"}
+                          {if $vo.del_status==0}
+                            <tr>
+                                <td></td>
+                                <td>{$vo.video_name}</td>
+                                <td><video width="320" height="240" controls="controls" src="__STATIC__/club_admin/video/{$vo.video_content}"></video></td>
+                                <td>{$vo.video_desc}</td>   
+                                <td>{$vo.video_time}</td>
+                                {if $vo.video_status==0}
+                                <td><a href="{:url('video/update',['video_id'=>$vo.video_id])}">修改视频信息</a>|<a href="{:url('video/del',['video_id'=>$vo.video_id])}">删除</a>
+                                  <p><a href="{:url('video/pub',['video_id'=>$vo.video_id])}" class="btn btn-info">一键发布</a></p>
+                                </td>
+                                {else/}
+                                <td><a href="{:url('video/sub',['video_id'=>$vo.video_id])}" class="btn btn-info">下架</a></td>
+                                {/if}
+                            </tr>
+                             {/if}
+                        {/volist}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+     <!-- 删除模态框（Modal） -->
+     <div class="modal fade" id="myModal" data-backdrop="static" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="model-backdrop fade in"></div>
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title" id="myModalLabel"></h4>
+             </div>
+             <h2 class="modal-body" style="margin-left: 100px">确认删除该视频吗？</h2>
+
+             <div class="modal-footer">
+                 <form class="form-horizontal" method="POST"
+                     action="{:url('video/del',['video_id'=>$vo.video_id])}" enctype="multipart/form-data">
+                     <input type="hidden" name="train_id" id="train_id">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                     <input type="submit" class="btn btn-danger btn-ok" value="确认删除">
+                 </form>
+             </div>
+         </div>
+     </div>
+ </div>
+    <!-- Essential javascripts for application to work-->
+    <script src="__PUBLIC__/docs/js/jquery-3.2.1.min.js"></script>
+    <script src="__PUBLIC__/docs/js/popper.min.js"></script>
+    <script src="__PUBLIC__/docs/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/docs/js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="__PUBLIC__/docs/js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="__PUBLIC__/docs/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/docs/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+    <!-- Google analytics script-->
+       <script language="javascript" type="text/javascript">
+      window.onload = function(){
+        var oTable = document.getElementById("num");
+        for(var i=0;i<oTable.rows.length;i++){
+        oTable.rows[i].cells[0].innerHTML = (i+1);
+      }
+    }
+    </script>
+    <script type="text/javascript">
+      if(document.location.hostname == 'pratikborsadiya.in') {
+      	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      	ga('create', 'UA-72504830-1', 'auto');
+      	ga('send', 'pageview');
+      }
+    </script>
+
+  </body>
+</html>

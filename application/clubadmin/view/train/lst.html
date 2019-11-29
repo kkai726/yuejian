@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="description"
+        content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <!-- Twitter meta-->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@pratikborsadiya">
+    <meta property="twitter:creator" content="@pratikborsadiya">
+    <!-- Open Graph Meta-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vali Admin">
+    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
+    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
+    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
+    <meta property="og:description"
+        content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <title>约健 - 俱乐部管理员</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/docs/css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    {include file="commom/top"}
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    {include file="commom/left"}
+    <main class="app-content">
+        <div class="app-title">
+            <div>
+                <h1><i class="fa fa-circle-o"></i>俱乐部训练</h1>
+                <p>Club training</p>
+            </div>
+            <ul class="app-breadcrumb breadcrumb side">
+                <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                <li class="breadcrumb-item"><a href="#">俱乐部训练</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="tile-body">
+                        <p><a class="btn btn-primary icon-btn" href="{:url('train/add')}"><i class="fa fa-plus"></i>添加</a></p>
+                        <table class="table table-hover table-bordered" id="sampleTable">
+                            <thead>
+                                <tr>
+                                    <th>编号</th>
+                                    <th>训练名称</th>
+                                    <th>训练海报</th>
+                                    <th>训练简介</th>
+                                    <th>训练地点</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th>等级</th>
+                                    <th>价格</th>
+                                    <th>MAX人数</th>
+                                    <th>发布</th>
+                                    <th>已报名</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {volist name="train" id="us"}
+                                <tr>
+                                    <td>{$i}</td>
+                                    <td>{$us.train_name}</td>
+                                    <td><img src="__PUBLIC__/train/{$us.train_pic}" style="width:80px;height:80px;"></td>
+                                    <td style="width:150px;">{$us.train_desc}</td>
+                                    <td>{$us.train_address}</td>
+                                    <td>{$us.train_otime}</td>
+                                    <td>{$us.train_ctime}</td>
+                                    <td>{$us.level_name}</td>
+                                    <td>{$us.train_price}</td>
+                                    <td>{$us.train_limit}</td>
+                                    {if $us.train_status==0}
+                                  <td><a href="{:url('train/pub',['train_id'=>$us.train_id])}">
+                                  <button class="btn btn-primary btn-sm" type="button">一键发布</button></a>
+                                  </td>
+                                  <td>尚未发布</td>
+                                  {else/}
+                                  <td><div class="bs-component"><span class="badge badge-pill badge-warning">已发布</span></div></td>
+                                  <td><a href="{:url('train/enter',['train_id'=>$us.train_id])}">查看</a></td>
+                                  {/if}
+                                    
+                                    {if $us.train_status==1}
+                                      <td><a href="{:url('train/down',['train_id'=>$us.train_id])}">下架</a></td>
+                                      {else/}
+                                      <td><a href="{:url('train/edit',['train_id'=>$us.train_id])}">修改</a>|
+                                        <a href="{:url('train/deltrain',['train_id'=>$us.train_id])}">删除</a>
+                                      </td>
+                                    {/if}
+                                </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Essential javascripts for application to work-->
+    <script src="__PUBLIC__/docs/js/jquery-3.2.1.min.js"></script>
+    <script src="__PUBLIC__/docs/js/popper.min.js"></script>
+    <script src="__PUBLIC__/docs/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/docs/js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="__PUBLIC__/docs/js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="__PUBLIC__/docs/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/docs/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+</body>
+
+</html>

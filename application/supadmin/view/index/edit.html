@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description"
+        content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <!-- Twitter meta-->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@pratikborsadiya">
+    <meta property="twitter:creator" content="@pratikborsadiya">
+    <!-- Open Graph Meta-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vali Admin">
+    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
+    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
+    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
+    <meta property="og:description"
+        content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <title>约健 - 超级管理员</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/docs/css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    {include file="commom/top"}
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    {include file="commom/left"}
+    <main class="app-content">
+        <div class="app-title">
+            <div>
+                <h1><i class="fa fa-list"></i>修改超级管理员密码</h1>
+                <p>Various type of charts for your project</p>
+            </div>
+            <ul class="app-breadcrumb breadcrumb">
+                <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                <li class="breadcrumb-item"><a href="#"></a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="tile">
+                    <h3 class="tile-title">修改超级管理员密码</h3>
+                    <div class="tile-body">
+                        <form class="form-horizontal" action="" method="post">
+                            <input type="hidden" name="supadmin_id" value="{$info.supadmin_id}">
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">原密码</label>
+                                <div class="col-md-8">
+                                    <input class="form-control col-md-8" type="password" name="old_password" placeholder="请输入原密码">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">新密码</label>
+                                <div class="col-md-8">
+                                    <input class="form-control col-md-8" type="password" name="new_password" placeholder="请输入新密码">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">确认新密码</label>
+                                <div class="col-md-8">
+                                    <input class="form-control col-md-8" type="password" name="again_password" placeholder="请重新输入新密码">
+                                </div>
+                            </div>
+
+                            <!-- <div class="form-group row">
+                                <label class="control-label col-md-3">Identity Proof</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" type="file">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-8 col-md-offset-3">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox">I accept the terms and
+                                            conditions
+                                        </label>
+                                    </div>
+                                </div>
+                            </div> -->
+                        
+                    </div>
+                    <div class="tile-footer">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-3">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fa fa-fw fa-lg fa-check-circle"></i>提交</button>&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-secondary" href="{:url('index/index')}">
+                                    <i class="fa fa-fw fa-lg fa-times-circle"></i>取消修改</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </main>
+    <!-- Essential javascripts for application to work-->
+    <script src="__PUBLIC__/docs/js/jquery-3.2.1.min.js"></script>
+    <script src="__PUBLIC__/docs/js/popper.min.js"></script>
+    <script src="__PUBLIC__/docs/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/docs/js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="__PUBLIC__/docs/js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+</body>
+
+</html>
