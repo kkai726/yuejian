@@ -1,9 +1,13 @@
-# yuejian
-健身俱乐部后台管理系统
-超级管理员访问网站为
-http://htk.iy3u6.cn/yuejian5/public/index.php/supadmin
-账号：htk 密码：11
-俱乐部管理员访问网站为
-http://htk.iy3u6.cn/yuejian5/public/index.php/clubadmin
-账号：htk 密码：11
-
+使用thinkphp5
+- application 
+    - clubadmin  // 普通后台管理员
+        - controller // 控制器
+        - model // 模型层
+        - validate // 验证信息
+        - view // 页面
+    -  index // 用户页
+    - supadmin // 超级管理员
+        - controller // 控制器
+        - model // 模型层
+        - validate // 验证信息
+        - view // 页面
